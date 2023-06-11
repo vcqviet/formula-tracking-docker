@@ -1,0 +1,6 @@
+[submodule "apps/formula-tracking-api"]
+	path = apps/formula-tracking-api
+	url = git@github.com:vcqviet/formula-tracking-api.git
+[submodule "apps/formula-tracking-app"]
+	path = apps/formula-tracking-app
+	url = git@github.com:vcqviet/formula-tracking-app.git
