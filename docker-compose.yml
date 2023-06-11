@@ -1,0 +1,48 @@
+version: "3.8"
+services:
+  # Worker 1
+  mongo1:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: mongo123
+      MONGO_INITDB_DATABASE: formula
+    ports:
+      - 27017:27017
+    command: 'mongod'
+    networks:
+      - main-network
+
+  formula_tracking_api:
+    build:
+      dockerfile: docker/api/Dockerfile
+    image: formula-tracking-api
+    container_name: formula_tracking_api
+    ports:
+      - 3001:3001
+    volumes:
+      - ./apps/:/app
+    networks:
+      - main-network
+
+  formula_tracking_app:
+    build:
+      dockerfile: docker/app/Dockerfile
+    image: formula-tracking-app
+    container_name: formula_tracking_app
+    ports:
+      - 3002:3002
+    volumes:
+      - ./apps/:/app
+    stdin_open: true
+    networks:
+      - main-network
+
+networks:
+  main-network:
+    external:
+      name: formular-network
+volumes:
+    mongodata:
+    mongodata2:
+    mongodata3:
